@@ -1,0 +1,31 @@
+/* style.css */
+
+/* "All odd numbered elements": light red/pink background, and a list of fonts */
+.odd { /* Targets elements with class="odd" */
+    background-color: #FFC0CB; /* Light pink */
+    font-family: Verdana, 'DejaVu Sans', sans-serif;
+}
+
+/* "The second element": blue text and a font size of 36px */
+#second-element { /* Targets the element with id="second-element" */
+    color: rgb(0, 0, 255); /* Blue */
+    font-size: 36px;
+}
+
+/* "The third element": in addition to "odd" styles, add a font size of 24px */
+#third-element { /* Targets the element with id="third-element" */
+    /* This element already gets .odd styles because it has class="odd" */
+    font-size: 24px;
+}
+
+/* "The fourth element": light green background, font size of 24px, and bold */
+#fourth-element { /* Targets the element with id="fourth-element" */
+    background-color: #90EE90; /* Light green */
+    font-size: 24px;
+    font-weight: bold;
+}
+#another-class {
+	background-color: #90ee90;
+	font-size: 24px; 
+	font-weight: bold; 
+}
