@@ -1,32 +1,73 @@
+/* Ensure these base styles are correct for the dropdown container and title */
 .dropdown-container {
-  max-width: 250px;
-  margin: 40px auto;
-  text-align: center;
-  line-height: 50px;
-  font-size: 15px;
-  color: rgb(247, 247, 247);
-  cursor: pointer;
+    max-width: 250px;
+    margin: 40px auto;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    color: rgb(247, 247, 247);
+    cursor: pointer;
+    font-family: sans-serif; /* Added for better typography, from previous suggestion */
 }
 
 .menu-title {
-  background-color: rgb(163, 162, 162);
+    background-color: rgb(163, 162, 162);
+    padding: 10px 0; /* Added padding for better appearance, from previous suggestion */
 }
 
 .dropdown-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: rgb(99, 97, 97);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(99, 97, 97);
 
-  display: none;
+    /* Initial hidden state properties */
+    max-height: 0;       /* Collapsed height */
+    opacity: 0;          /* Invisible */
+    overflow: hidden;    /* Important: Hides content that exceeds max-height: 0 */
+    transform-origin: top; /* Animation originates from the top */
+    transform: scaleY(0); /* Starts completely squashed vertically */
+
+    /* Transition for smooth animation when properties change (e.g., when .visible is added) */
+    /* Add 'transform' to the transition property explicitly */
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.dropdown-menu li {
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 ul.dropdown-menu li:hover {
-  background: rgb(47, 46, 46);
+    background: rgb(47, 46, 46);
 }
 
-.visible {
-  display: block;
+/* This is the critical block for when the dropdown is active */
+.dropdown-menu.visible {
+    /* These values are the *target* values after transition/animation */
+    max-height: 400px; /* Make sure this is tall enough for all your list items */
+    opacity: 1;
+    transform: scaleY(1);
+
+    /* Apply the animation here. This animation will override the simple transition for a moment */
+    animation: bounce 0.5s ease-out forwards; /* ADD 'forwards' to keep the final state */
 }
 
-
+/* Keyframes for the bounce animation */
+@keyframes bounce {
+    0% {
+        max-height: 0;
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    70% { /* The overshoot for the bounce effect */
+        max-height: 400px; /* Slightly more than the final max-height */
+        opacity: 1;
+        transform: scaleY(1.1); /* Slightly more than the final scale */
+    }
+    100% {
+        max-height: 400px; /* Final height */
+        opacity: 1;
+        transform: scaleY(1); /* Final scale */
+    }
+}
